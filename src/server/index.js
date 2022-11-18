@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
+import fastifySensible from "@fastify/sensible";
 import fastify from "fastify";
-import fastifySensible from "fastify-sensible";
 
 import { User } from "../model/index.js";
 
@@ -15,9 +15,12 @@ const server = fastify({
   logger: IS_PRODUCTION
     ? false
     : {
-        prettyPrint: {
-          ignore: "pid,hostname",
-          translateTime: "SYS:HH:MM:ss",
+        transport: {
+          options: {
+            ignore: "pid,hostname",
+            translateTime: "SYS:HH:MM:ss",
+          },
+          target: "pino-pretty",
         },
       },
 });
@@ -28,7 +31,7 @@ server.addHook("onRequest", async (req, res) => {
 
   const userId = req.headers["x-app-userid"];
   if (userId !== undefined) {
-    const user = await repo.findOne(userId);
+    const user = await repo.findOneBy({ id: userId });
     if (user === undefined) {
       res.unauthorized();
       return;
@@ -48,7 +51,7 @@ server.register(spaRoute);
 const start = async () => {
   try {
     await initialize();
-    await server.listen(process.env.PORT || 3000, "0.0.0.0");
+    await server.listen({ host: "0.0.0.0", port: process.env.PORT || 3000 });
   } catch (err) {
     server.log.error(err);
     process.exit(1);

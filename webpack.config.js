@@ -2,6 +2,7 @@
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
 
 function abs(...args) {
@@ -57,9 +58,20 @@ module.exports = [
       new CopyPlugin({
         patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
       }),
+      new webpack.ProvidePlugin({
+        process: "process/browser",
+      }),
     ],
     resolve: {
       extensions: [".js", ".jsx"],
+      fallback: {
+        assert: require.resolve("assert"),
+        http: require.resolve("stream-http"),
+        https: require.resolve("https-browserify"),
+        stream: require.resolve("stream-browserify"),
+        url: require.resolve("url"),
+        zlib: require.resolve("browserify-zlib"),
+      },
     },
     target: "web",
   },
