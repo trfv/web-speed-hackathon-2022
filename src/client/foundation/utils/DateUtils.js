@@ -1,11 +1,32 @@
-import moment from "moment-timezone";
+import { toDate } from "../../../utils/dateutils";
+
+export const newDate = () => toDate(new Date());
+
 /**
  * @param {string} dateLeft
  * @param {string} dateRight
  * @returns {boolean}
  */
 export const isSameDay = (dateLeft, dateRight) => {
-  return moment(dateLeft).isSame(moment(dateRight), "day");
+  return toDate(dateLeft).isSame(toDate(dateRight), "day");
+};
+
+/**
+ * @param {string} dateLeft
+ * @param {string} dateRight
+ * @returns {boolean}
+ */
+export const isBefore = (dateLeft, dateRight) => {
+  return toDate(dateLeft).isBefore(toDate(dateRight));
+};
+
+/**
+ * @param {string} dateLeft
+ * @param {string} dateRight
+ * @returns {boolean}
+ */
+ export const isAfter = (dateLeft, dateRight) => {
+  return toDate(dateLeft).isAfter(toDate(dateRight));
 };
 
 /**
@@ -14,7 +35,7 @@ export const isSameDay = (dateLeft, dateRight) => {
  * @returns {string}
  */
 export const formatTime = (ts) => {
-  return moment(ts).format("H:mm");
+  return toDate(ts).format("H:mm");
 };
 
 /**
@@ -23,13 +44,13 @@ export const formatTime = (ts) => {
  * @returns {string}
  */
 export const formatCloseAt = (closeAt, now = new Date()) => {
-  if (moment(closeAt).isBefore(now)) {
+  if (toDate(closeAt).isBefore(now)) {
     return "投票締切";
   }
 
-  if (moment(closeAt).isAfter(moment(now).add(2, "hours"))) {
+  if (toDate(closeAt).isAfter(toDate(now).add(2, "hours"))) {
     return "投票受付中";
   }
 
-  return `締切${moment(closeAt).diff(now, "minutes")}分前`;
+  return `締切${toDate(closeAt).diff(now, "minutes")}分前`;
 };
