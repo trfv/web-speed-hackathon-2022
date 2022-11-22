@@ -79,12 +79,9 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
     [charge, bankCode, branchCode, accountNo, amount, onComplete, clearForm],
   );
 
-  const bankList = Object.entries(zenginCode).map(([code, { name }]) => ({
-    code,
-    name,
-  }));
+  const bankList = Object.values(zenginCode);
   const bank = zenginCode[bankCode];
-  const branch = bank?.branches[branchCode];
+  const branch = bank?.b[branchCode];
 
   return (
     <Dialog ref={ref} onClose={handleCloseDialog}>
@@ -104,8 +101,8 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
             </label>
 
             <datalist id="ChargeDialog-bank-list">
-              {bankList.map(({ code, name }) => (
-                <option key={code} value={code}>{`${name} (${code})`}</option>
+              {bankList.map(({ c, n }) => (
+                <option key={c} value={c}>{`${n} (${c})`}</option>
               ))}
             </datalist>
 
@@ -113,7 +110,7 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
               <>
                 <FadeInStyle />
                 <div style={{ animation: "fadeIn 1s" }}>
-                  銀行名: {bank.name}銀行
+                  銀行名: {bank.n}銀行
                 </div>
               </>
             )}
@@ -129,9 +126,9 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
 
             <datalist id="ChargeDialog-branch-list">
               {bank != null &&
-                Object.values(bank.branches).map((branch) => (
-                  <option key={branch.code} value={branch.code}>
-                    {branch.name}
+                Object.values(bank.b).map((branch) => (
+                  <option key={branch.c} value={branch.c}>
+                    {branch.n}
                   </option>
                 ))}
             </datalist>
@@ -140,7 +137,7 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
               <>
                 <FadeInStyle />
                 <div style={{ animation: "fadeIn 1s" }}>
-                  支店名: {branch.name}
+                  支店名: {branch.n}
                 </div>
               </>
             )}
