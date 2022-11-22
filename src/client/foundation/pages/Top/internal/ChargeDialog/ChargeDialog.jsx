@@ -1,6 +1,5 @@
 import React, { forwardRef, useCallback, useState } from "react";
 
-import { zenginCode } from "../../../../../../utils/zengin.js";
 import { Dialog } from "../../../../components/layouts/Dialog";
 import { Spacer } from "../../../../components/layouts/Spacer";
 import { Stack } from "../../../../components/layouts/Stack";
@@ -30,7 +29,7 @@ const FadeInStyle = () => (
  */
 
 /** @type {React.ForwardRefExoticComponent<{Props>} */
-export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
+export const ChargeDialog = forwardRef(({ onComplete, zenginCode }, ref) => {
   const [bankCode, setBankCode] = useState("");
   const [branchCode, setBranchCode] = useState("");
   const [accountNo, setAccountNo] = useState("");

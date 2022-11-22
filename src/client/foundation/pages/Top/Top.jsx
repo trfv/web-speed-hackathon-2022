@@ -97,20 +97,30 @@ function useHeroImage(todayRaces) {
   return imageUrl;
 }
 
+const ChargeButton = styled.button`
+  background: ${Color.mono[700]};
+  border-radius: ${Radius.MEDIUM};
+  color: ${Color.mono[0]};
+  padding: ${Space * 1}px ${Space * 2}px;
+
+  &:hover {
+    background: ${Color.mono[800]};
+  }
+`;
+
 /** @type {React.VFC} */
 export const Top = () => {
   const { date = newDate().format("YYYY-MM-DD") } = useParams();
 
-  const ChargeButton = styled.button`
-    background: ${Color.mono[700]};
-    border-radius: ${Radius.MEDIUM};
-    color: ${Color.mono[0]};
-    padding: ${Space * 1}px ${Space * 2}px;
+  const [zenginCode, setZenginCode] = useState(null);
 
-    &:hover {
-      background: ${Color.mono[800]};
-    }
-  `;
+  useEffect(() => {
+    const fn = async () => {
+      const res = await fetch("zengin.json");
+      setZenginCode(await res.json());
+    };
+    fn();
+  }, []);
 
   const chargeDialogRef = useRef(null);
 
@@ -176,7 +186,7 @@ export const Top = () => {
         )}
       </section>
 
-      <ChargeDialog ref={chargeDialogRef} onComplete={handleCompleteCharge} />
+      {zenginCode && <ChargeDialog ref={chargeDialogRef} onComplete={handleCompleteCharge} zenginCode={zenginCode} />}
     </Container>
   );
 };
