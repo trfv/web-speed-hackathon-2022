@@ -2,7 +2,7 @@
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const nodeExternals = require("webpack-node-externals");
 
 function abs(...args) {
@@ -17,9 +17,9 @@ const DIST_PUBLIC = abs("./dist/public");
 /** @type {Array<import('webpack').Configuration>} */
 module.exports = [
   {
-    devtool: "inline-source-map",
+    devtool: false,
     entry: path.join(SRC_ROOT, "client/index.jsx"),
-    mode: "development",
+    mode: "production",
     module: {
       rules: [
         {
@@ -39,7 +39,7 @@ module.exports = [
                 [
                   "@babel/preset-env",
                   {
-                    modules: "cjs",
+                    modules: "auto",
                     spec: true,
                   },
                 ],
@@ -51,6 +51,9 @@ module.exports = [
       ],
     },
     name: "client",
+    optimization: {
+      nodeEnv: "production",
+    },
     output: {
       path: DIST_PUBLIC,
     },
@@ -58,9 +61,7 @@ module.exports = [
       new CopyPlugin({
         patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
       }),
-      new webpack.ProvidePlugin({
-        process: "process/browser",
-      }),
+      new BundleAnalyzerPlugin(),
     ],
     resolve: {
       extensions: [".js", ".jsx"],

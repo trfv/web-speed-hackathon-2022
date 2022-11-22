@@ -9,13 +9,21 @@ import { TrimmedImage } from "../../../components/media/TrimmedImage";
 import { TabNav } from "../../../components/navs/TabNav";
 import { Heading } from "../../../components/typographies/Heading";
 import { useFetch } from "../../../hooks/useFetch";
-import { Color, Radius, Space } from "../../../styles/variables";
+import { Color, FontSize, Radius, Space } from "../../../styles/variables";
 import { formatTime, isBefore } from "../../../utils/DateUtils";
 import { jsonFetcher } from "../../../utils/HttpUtils";
 
 import { OddsRankingList } from "./internal/OddsRankingList";
 import { OddsTable } from "./internal/OddsTable";
 import { TicketVendingModal } from "./internal/TicketVendingModal";
+
+const InfoCircle = ({ fill }) => {
+  return (
+    <svg height={FontSize.MEDIUM} viewBox="0 0 512 512" width={FontSize.MEDIUM}>
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" fill={fill} />
+    </svg>
+  );
+}
 
 const LiveBadge = styled.span`
   background: ${Color.red};
@@ -75,7 +83,7 @@ export const Odds = () => {
       <Section dark shrink>
         <LiveBadge>Live</LiveBadge>
         <Spacer mt={Space * 2} />
-        <TrimmedImage height={225} src={data.image} width={400} />
+        <TrimmedImage alt={`${data.name}のイメージ`} height={225} src={data.image} width={400} />
       </Section>
 
       <Spacer mt={Space * 2} />
@@ -92,7 +100,7 @@ export const Odds = () => {
         <Spacer mt={Space * 4} />
 
         <Callout $closed={isRaceClosed}>
-          <i className="fas fa-info-circle" />
+          <InfoCircle fill={isRaceClosed ? Color.mono[600] : Color.green[500]} />
           {isRaceClosed
             ? "このレースの投票は締め切られています"
             : "オッズをクリックすると拳券が購入できます"}
