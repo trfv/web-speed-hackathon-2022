@@ -10,7 +10,7 @@ import React from "react";
 
 /** @type {React.VFC<Props>} */
 export const TrimmedImage = ({ alt, height, src, width }) => {
-  const aspectRatio = !!width && !!height ? `${width} / ${height}` : "auto"; 
+  const aspectRatio = !!width && !!height ? `${width} / ${height}` : "auto";
   return (
     <img
       alt={alt}

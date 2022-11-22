@@ -2,7 +2,7 @@
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const nodeExternals = require("webpack-node-externals");
 
 function abs(...args) {

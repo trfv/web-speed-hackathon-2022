@@ -136,9 +136,8 @@ export const Top = () => {
   const todayRaces =
     raceData != null
       ? [...raceData.races]
-          .sort(
-            (/** @type {Model.Race} */ a, /** @type {Model.Race} */ b) =>
-            isAfter(a.startAt, b.startAt) ? 1 : -1
+          .sort((/** @type {Model.Race} */ a, /** @type {Model.Race} */ b) =>
+            isAfter(a.startAt, b.startAt) ? 1 : -1,
           )
           .filter((/** @type {Model.Race} */ race) =>
             isSameDay(race.startAt, date),

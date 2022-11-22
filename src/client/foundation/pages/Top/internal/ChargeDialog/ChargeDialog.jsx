@@ -11,8 +11,9 @@ import { Space } from "../../../../styles/variables";
 const CANCEL = "cancel";
 const CHARGE = "charge";
 
-const FadeInStyle = () => (<style>
-  {`@keyframes fadeIn {
+const FadeInStyle = () => (
+  <style>
+    {`@keyframes fadeIn {
     0% {
       opacity: 0;
     }
@@ -20,7 +21,8 @@ const FadeInStyle = () => (<style>
       opacity: 1;
     }
   }`}
-</style>);
+  </style>
+);
 
 /**
  * @typedef Props
@@ -110,7 +112,7 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
             {bank != null && (
               <>
                 <FadeInStyle />
-                <div style={{ animation: 'fadeIn 1s' }}>
+                <div style={{ animation: "fadeIn 1s" }}>
                   銀行名: {bank.name}銀行
                 </div>
               </>
@@ -137,7 +139,7 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
             {branch && (
               <>
                 <FadeInStyle />
-                <div style={{ animation: 'fadeIn 1s' }}>
+                <div style={{ animation: "fadeIn 1s" }}>
                   支店名: {branch.name}
                 </div>
               </>
