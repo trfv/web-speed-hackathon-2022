@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.20.1",
+    "@fastify/compress": "6.1.1",
     "@fastify/sensible": "5.1.1",
     "@fastify/static": "6.5.0",
     "assert": "2.0.0",

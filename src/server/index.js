@@ -1,4 +1,4 @@
-import "regenerator-runtime/runtime";
+import fastifyCompress from "@fastify/compress";
 import fastifySensible from "@fastify/sensible";
 import fastify from "fastify";
 
@@ -24,6 +24,7 @@ const server = fastify({
         },
       },
 });
+server.register(fastifyCompress, { global: true });
 server.register(fastifySensible);
 
 server.addHook("onRequest", async (req, res) => {

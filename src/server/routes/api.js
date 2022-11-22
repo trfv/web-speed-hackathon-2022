@@ -10,7 +10,7 @@ import { initialize } from "../typeorm/initialize.js";
  * @type {import('fastify').FastifyPluginCallback}
  */
 export const apiRoute = async (fastify) => {
-  fastify.get("/users/me", async (req, res) => {
+  fastify.get("/users/me", { compress: false }, async (req, res) => {
     const repo = (await createConnection()).getRepository(User);
 
     if (req.user != null) {
@@ -21,7 +21,7 @@ export const apiRoute = async (fastify) => {
     }
   });
 
-  fastify.post("/users/me/charge", async (req, res) => {
+  fastify.post("/users/me/charge", { compress: false }, async (req, res) => {
     if (req.user == null) {
       throw fastify.httpErrors.unauthorized();
     }
@@ -39,14 +39,14 @@ export const apiRoute = async (fastify) => {
     res.status(204).send();
   });
 
-  fastify.get("/hero", async (_req, res) => {
+  fastify.get("/hero", { compress: false }, async (_req, res) => {
     const url = assets("/images/hero.webp");
     const hash = Math.random().toFixed(10).substring(2);
 
     res.send({ hash, url });
   });
 
-  fastify.get("/races", async (req, res) => {
+  fastify.get("/races", { compress: false }, async (req, res) => {
     const since = req.query.since != null ? toDate(req.query.since) : undefined;
     const until = req.query.until != null ? toDate(req.query.until) : undefined;
 
@@ -84,7 +84,7 @@ export const apiRoute = async (fastify) => {
     res.send({ races });
   });
 
-  fastify.get("/races/:raceId", async (req, res) => {
+  fastify.get("/races/:raceId", { compress: false }, async (req, res) => {
     const repo = (await createConnection()).getRepository(Race);
 
     const race = await repo.findOne({
@@ -101,7 +101,7 @@ export const apiRoute = async (fastify) => {
     res.send(race);
   });
 
-  fastify.get("/races/:raceId/betting-tickets", async (req, res) => {
+  fastify.get("/races/:raceId/betting-tickets", { compress: false }, async (req, res) => {
     if (req.user == null) {
       throw fastify.httpErrors.unauthorized();
     }
@@ -123,7 +123,7 @@ export const apiRoute = async (fastify) => {
     });
   });
 
-  fastify.post("/races/:raceId/betting-tickets", async (req, res) => {
+  fastify.post("/races/:raceId/betting-tickets", { compress: false }, async (req, res) => {
     if (req.user == null) {
       throw fastify.httpErrors.unauthorized();
     }
@@ -166,7 +166,7 @@ export const apiRoute = async (fastify) => {
     res.send(bettingTicket);
   });
 
-  fastify.post("/initialize", async (_req, res) => {
+  fastify.post("/initialize", { compress: false }, async (_req, res) => {
     await initialize();
     res.status(204).send();
   });
