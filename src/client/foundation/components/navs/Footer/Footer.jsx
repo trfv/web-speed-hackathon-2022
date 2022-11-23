@@ -50,7 +50,7 @@ const WarningText = styled.p`
   font-size: ${FontSize.X_SMALL};
 `;
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const Footer = () => {
   return (
     <Wrapper>

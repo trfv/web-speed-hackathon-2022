@@ -8,7 +8,7 @@ const Odds = lazy(() => import("./pages/races/Odds"));
 const RaceCard = lazy(() => import("./pages/races/RaceCard"));
 const RaceResult = lazy(() => import("./pages/races/RaceResult"));
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const Routes = () => {
   return (
     <RouterRoutes>

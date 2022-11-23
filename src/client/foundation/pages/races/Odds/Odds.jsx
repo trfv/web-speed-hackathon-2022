@@ -49,7 +49,7 @@ const Callout = styled.aside`
   padding: ${Space * 1}px ${Space * 2}px;
 `;
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const Odds = () => {
   const { raceId } = useParams();
   const { data } = useFetch(`/api/races/${raceId}`, jsonFetcher);

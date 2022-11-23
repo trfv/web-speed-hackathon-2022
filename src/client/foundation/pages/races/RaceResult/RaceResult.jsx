@@ -26,7 +26,7 @@ const LiveBadge = styled.span`
   text-transform: uppercase;
 `;
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const RaceResult = () => {
   const { raceId } = useParams();
   const { data } = useFetch(`/api/races/${raceId}`, jsonFetcher);

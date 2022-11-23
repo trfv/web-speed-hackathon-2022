@@ -24,7 +24,7 @@ export * from "./{{ name }}";
 ```javascript
 import React from "react";
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const {{ name }} = () => {
   return <div>{{ name }}</div>;
 };

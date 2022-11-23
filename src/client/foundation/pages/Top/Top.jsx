@@ -108,7 +108,7 @@ const ChargeButton = styled.button`
   }
 `;
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const Top = () => {
   const { date = newDate().format("YYYY-MM-DD") } = useParams();
 

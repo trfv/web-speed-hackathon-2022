@@ -25,7 +25,7 @@ async function run() {
   await insertRaceEntries();
   await insertOddsItems();
 
-  await connection.close();
+  await connection.destroy();
   await copyFile(DATABASE_PATH, INITIAL_DATABASE_PATH);
 }
 

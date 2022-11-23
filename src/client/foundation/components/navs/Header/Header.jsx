@@ -38,7 +38,7 @@ const LoginButton = styled(BaseButton)`
   }
 `;
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const Header = () => {
   const { loggedIn } = useAuth();
   const register = useRegister();

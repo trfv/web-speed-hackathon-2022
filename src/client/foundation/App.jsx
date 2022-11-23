@@ -6,7 +6,7 @@ import { AuthContextProvider } from "./contexts/AuthContext";
 import { Routes } from "./routes";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
-/** @type {React.VFC} */
+/** @type {React.FC} */
 export const App = () => {
   return (
     <StyleSheetManager disableCSSOMInjection>
