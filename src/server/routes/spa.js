@@ -6,10 +6,6 @@ import fastifyStatic from "@fastify/static";
  * @type {import('fastify').FastifyPluginCallback}
  */
 export const spaRoute = async (fastify) => {
-  fastify.get("/zengin.json", (_req, reply) => {
-    return reply.sendFile("zengin.min.json", join(__dirname, "public"));
-  });
-
   fastify.register(fastifyStatic, {
     root: join(__dirname, "public"),
     wildcard: false,

@@ -109,7 +109,7 @@ export const Top = () => {
 
   useEffect(() => {
     const fn = async () => {
-      const res = await fetch("zengin.json");
+      const res = await fetch("zengin.min.json");
       setZenginCode(await res.json());
     };
     fn();
