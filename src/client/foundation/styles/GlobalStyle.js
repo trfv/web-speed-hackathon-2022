@@ -27,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "Senobi-Gothic";
     font-weight: bold;
     font-display: swap;
-    src: url("/assets/fonts/MODI_Senobi-Gothic_2017_0702/Senobi-Gothic-Bold.ttf") format("truetype");
+    src: url("/assets/fonts/MODI_Senobi-Gothic_2017_0702/Senobi-Gothic-Bold.subset.woff2") format("woff2");
+    unicode-range: U+0030-0039, U+002E;
   }
 `;
