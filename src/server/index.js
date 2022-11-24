@@ -43,7 +43,7 @@ server.addHook("onRequest", async (req, res) => {
 });
 
 server.addHook("onRequest", async (req, res) => {
-  res.header("Cache-Control", "max-age=5000, stale-while-revalidate=500");
+  res.header("Cache-Control", "public, max-age=5000, stale-while-revalidate=500");
   res.header("Connection", "keep-alive");
 });
 
