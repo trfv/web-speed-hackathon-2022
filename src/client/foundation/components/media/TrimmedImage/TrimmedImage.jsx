@@ -14,6 +14,7 @@ export const TrimmedImage = ({ alt, height, src, width }) => {
   return (
     <img
       alt={alt}
+      decoding="async"
       height={height}
       loading="lazy"
       src={src.replace(".jpg", ".webp")}

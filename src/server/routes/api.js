@@ -39,11 +39,9 @@ export const apiRoute = async (fastify) => {
     res.status(204).send();
   });
 
-  fastify.get("/hero", { compress: false }, async (_req, res) => {
+  fastify.get("/hero", async (_req, res) => {
     const url = assets("/images/hero.webp");
-    const hash = Math.random().toFixed(10).substring(2);
-
-    res.send({ hash, url });
+    res.send({ url });
   });
 
   fastify.get("/races", { compress: false }, async (req, res) => {
