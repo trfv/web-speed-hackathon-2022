@@ -14,21 +14,16 @@ const PUBLIC_ROOT = abs("./public");
 const DIST_ROOT = abs("./dist");
 const DIST_PUBLIC = abs("./dist/public");
 
+const NODE_ENV = process.env.NODE_ENV;
+
 /** @type {Array<import('webpack').Configuration>} */
 module.exports = [
   {
-    devtool: false,
+    devtool: NODE_ENV === "production" ? false : "inline-source-map",
     entry: path.join(SRC_ROOT, "client/index.jsx"),
-    mode: "production",
+    mode: NODE_ENV,
     module: {
       rules: [
-        {
-          resourceQuery: (value) => {
-            const query = new URLSearchParams(value);
-            return query.has("raw");
-          },
-          type: "asset/source",
-        },
         {
           exclude: /node_modules/,
           test: /\.jsx?$/,
@@ -61,7 +56,7 @@ module.exports = [
       new CopyPlugin({
         patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
       }),
-      new BundleAnalyzerPlugin(),
+      ...(NODE_ENV === "production" ? [] : [new BundleAnalyzerPlugin()]),
     ],
     resolve: {
       extensions: [".js", ".jsx"],
