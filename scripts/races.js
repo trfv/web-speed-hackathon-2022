@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import sample from "lodash/sample";
+import { sample } from "lodash-es";
 import { v4 as uuid } from "uuid";
 
 import { Race } from "../src/model/index.js";

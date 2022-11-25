@@ -1,4 +1,4 @@
-import random from "lodash/random";
+import { random } from "lodash-es";
 import { v4 as uuid } from "uuid";
 
 import { OddsItem, Race, RaceEntry } from "../src/model/index.js";
