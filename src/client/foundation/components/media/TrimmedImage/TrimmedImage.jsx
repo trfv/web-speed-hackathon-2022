@@ -17,7 +17,7 @@ export const TrimmedImage = ({ alt, height, src, width }) => {
       alt={alt}
       decoding="async"
       height={isOverable ? "100%" : height}
-      loading="lazy"
+      loading={isOverable ? "eager" : "lazy"}
       src={src.replace(".jpg", ".webp")}
       style={{ aspectRatio, maxHeight: height, objectFit: "cover" }}
       width={isOverable ? "100%" : width}
