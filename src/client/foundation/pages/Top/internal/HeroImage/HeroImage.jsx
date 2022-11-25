@@ -14,5 +14,14 @@ const Image = styled.img`
 
 /** @type {React.VFC<Props>} */
 export const HeroImage = ({ url }) => {
-  return <Image alt={"Hero Image"} decoding="async" height="100%" loading="eager" src={url} width="100%" />;
+  return (
+    <Image
+      alt={"Hero Image"}
+      decoding="async"
+      height="100%"
+      loading="eager"
+      src={url}
+      width="100%"
+    />
+  );
 };

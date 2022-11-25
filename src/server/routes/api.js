@@ -99,70 +99,78 @@ export const apiRoute = async (fastify) => {
     res.send(race);
   });
 
-  fastify.get("/races/:raceId/betting-tickets", { compress: false }, async (req, res) => {
-    if (req.user == null) {
-      throw fastify.httpErrors.unauthorized();
-    }
+  fastify.get(
+    "/races/:raceId/betting-tickets",
+    { compress: false },
+    async (req, res) => {
+      if (req.user == null) {
+        throw fastify.httpErrors.unauthorized();
+      }
 
-    const repo = (await createConnection()).getRepository(BettingTicket);
-    const bettingTickets = await repo.find({
-      where: {
-        race: {
-          id: req.params.raceId,
+      const repo = (await createConnection()).getRepository(BettingTicket);
+      const bettingTickets = await repo.find({
+        where: {
+          race: {
+            id: req.params.raceId,
+          },
+          user: {
+            id: req.user.id,
+          },
         },
-        user: {
-          id: req.user.id,
-        },
-      },
-    });
+      });
 
-    res.send({
-      bettingTickets,
-    });
-  });
+      res.send({
+        bettingTickets,
+      });
+    },
+  );
 
-  fastify.post("/races/:raceId/betting-tickets", { compress: false }, async (req, res) => {
-    if (req.user == null) {
-      throw fastify.httpErrors.unauthorized();
-    }
+  fastify.post(
+    "/races/:raceId/betting-tickets",
+    { compress: false },
+    async (req, res) => {
+      if (req.user == null) {
+        throw fastify.httpErrors.unauthorized();
+      }
 
-    if (req.user.balance < 100) {
-      throw fastify.httpErrors.preconditionFailed();
-    }
+      if (req.user.balance < 100) {
+        throw fastify.httpErrors.preconditionFailed();
+      }
 
-    if (typeof req.body.type !== "string") {
-      throw fastify.httpErrors.badRequest();
-    }
+      if (typeof req.body.type !== "string") {
+        throw fastify.httpErrors.badRequest();
+      }
 
-    if (
-      !Array.isArray(req.body.key) ||
-      req.body.key.some((n) => typeof n !== "number")
-    ) {
-      throw fastify.httpErrors.badRequest();
-    }
+      if (
+        !Array.isArray(req.body.key) ||
+        req.body.key.some((n) => typeof n !== "number")
+      ) {
+        throw fastify.httpErrors.badRequest();
+      }
 
-    const bettingTicketRepo = (await createConnection()).getRepository(
-      BettingTicket,
-    );
-    const bettingTicket = await bettingTicketRepo.save(
-      new BettingTicket({
-        key: req.body.key,
-        race: {
-          id: req.params.raceId,
-        },
-        type: req.body.type,
-        user: {
-          id: req.user.id,
-        },
-      }),
-    );
+      const bettingTicketRepo = (await createConnection()).getRepository(
+        BettingTicket,
+      );
+      const bettingTicket = await bettingTicketRepo.save(
+        new BettingTicket({
+          key: req.body.key,
+          race: {
+            id: req.params.raceId,
+          },
+          type: req.body.type,
+          user: {
+            id: req.user.id,
+          },
+        }),
+      );
 
-    const userRepo = (await createConnection()).getRepository(User);
-    req.user.balance -= 100;
-    await userRepo.save(req.user);
+      const userRepo = (await createConnection()).getRepository(User);
+      req.user.balance -= 100;
+      await userRepo.save(req.user);
 
-    res.send(bettingTicket);
-  });
+      res.send(bettingTicket);
+    },
+  );
 
   fastify.post("/initialize", { compress: false }, async (_req, res) => {
     await initialize();

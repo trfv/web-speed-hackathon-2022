@@ -135,9 +135,7 @@ export const ChargeDialog = forwardRef(({ onComplete, zenginCode }, ref) => {
             {branch && (
               <>
                 <FadeInStyle />
-                <div style={{ animation: "fadeIn 1s" }}>
-                  支店名: {branch.n}
-                </div>
+                <div style={{ animation: "fadeIn 1s" }}>支店名: {branch.n}</div>
               </>
             )}
 

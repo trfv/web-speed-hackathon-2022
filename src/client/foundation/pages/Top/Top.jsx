@@ -1,5 +1,4 @@
-import difference from "lodash/difference";
-import slice from "lodash/slice";
+import { difference, slice } from "lodash-es";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -179,7 +178,13 @@ export const Top = () => {
         )}
       </section>
 
-      {zenginCode && <ChargeDialog ref={chargeDialogRef} onComplete={handleCompleteCharge} zenginCode={zenginCode} />}
+      {zenginCode && (
+        <ChargeDialog
+          ref={chargeDialogRef}
+          onComplete={handleCompleteCharge}
+          zenginCode={zenginCode}
+        />
+      )}
     </Container>
   );
 };
