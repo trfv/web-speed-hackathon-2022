@@ -33,7 +33,7 @@ const Cell = styled.td`
  * @property {Model.BettingTicket} ticket
  */
 
-/** @type {React.VFC<ItemProps>} */
+/** @type {React.FC<ItemProps>} */
 const Item = ({ ticket: { key } }) => {
   return (
     <ItemWrapper>

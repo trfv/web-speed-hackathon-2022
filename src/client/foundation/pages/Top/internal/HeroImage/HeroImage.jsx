@@ -12,7 +12,7 @@ const Image = styled.img`
  * @property {string} url
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const HeroImage = ({ url }) => {
   return (
     <Image

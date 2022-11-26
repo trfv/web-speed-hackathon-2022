@@ -29,7 +29,7 @@ import React from "react";
  * @typedef Props
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const {{ name }} = () => {
   return <div>{{ name }}</div>;
 };

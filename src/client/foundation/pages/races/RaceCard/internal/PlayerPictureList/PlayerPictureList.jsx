@@ -24,7 +24,7 @@ const PlayerName = styled.span`
  * @property {string} name
  */
 
-/** @type {React.VFC<ItemProps>} */
+/** @type {React.FC<ItemProps>} */
 const Item = ({ image, name, number }) => {
   return (
     <Stack gap={Space * 1}>

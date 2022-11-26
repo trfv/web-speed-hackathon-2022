@@ -56,7 +56,7 @@ const TableCell = styled.td`
  * @property {Model.RaceEntry[]} entries
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const EntryTable = ({ entries }) => {
   return (
     <Wrapper>

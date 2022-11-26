@@ -8,7 +8,7 @@ import React from "react";
  * @property {number} height
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const TrimmedImage = ({ alt, height, src, width }) => {
   const aspectRatio = `${width} / ${height}`;
   const isOverable = width > 320; // width が画面幅を超えうる場合。あらゆる場面でうまく動く気はしないが、VRTを突破するためにこれを入れてみる。

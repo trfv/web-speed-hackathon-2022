@@ -34,7 +34,7 @@ const Wrapper = styled.div`
  * @property {number[]} numbers
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const EntryCombination = ({ numbers }) => {
   return (
     <Wrapper>

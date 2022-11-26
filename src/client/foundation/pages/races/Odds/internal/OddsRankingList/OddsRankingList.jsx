@@ -64,7 +64,7 @@ const RankNo = styled.div`
  * @property {(odds: Model.OddsItem) => void} onClickOdds
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const OddsRankingList = ({ isRaceClosed, odds, onClickOdds }) => {
   const sortedOdds = take(
     sortBy(odds, (item) => item.odds),

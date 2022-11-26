@@ -79,7 +79,7 @@ const mapKey = (second, third) => `${second}.${third}`;
  * @property {(odds: Model.OddsItem) => void} onClickOdds
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const OddsTable = ({ entries, isRaceClosed, odds, onClickOdds }) => {
   const [firstKey, setFirstKey] = useState(1);
 

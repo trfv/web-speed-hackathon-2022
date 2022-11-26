@@ -29,7 +29,7 @@ const Wrapper = styled.div`
  * @typedef Props
  */
 
-/** @type {React.VFC<Props>} */
+/** @type {React.FC<Props>} */
 export const RaceResultSection = () => {
   return (
     <Wrapper>

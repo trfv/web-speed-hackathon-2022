@@ -45,7 +45,7 @@ const RaceTitle = styled.h2`
  * @property {Model.Race} race
  */
 
-/** @type {React.VFC<ItemProps>} */
+/** @type {React.FC<ItemProps>} */
 const Item = ({ race }) => {
   const [closeAtText, setCloseAtText] = useState(formatCloseAt(race.closeAt));
 
