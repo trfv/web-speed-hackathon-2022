@@ -1,5 +1,5 @@
 import { difference, slice } from "lodash-es";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ import { Heading } from "../../components/typographies/Heading";
 import { useAuthorizedFetch } from "../../hooks/useAuthorizedFetch";
 import { useFetch } from "../../hooks/useFetch";
 import { Color, Radius, Space } from "../../styles/variables";
-import { isAfter, isSameDay, newDate } from "../../utils/DateUtils";
+import { isSameDay, newDate } from "../../utils/DateUtils";
 import { authorizedJsonFetcher, jsonFetcher } from "../../utils/HttpUtils";
 
 import { ChargeDialog } from "./internal/ChargeDialog";
@@ -135,22 +135,25 @@ export const Top = () => {
     revalidate();
   }, [revalidate]);
 
-  const todayRaces =
-    raceData != null
-      ? [...raceData.races]
-          .sort((/** @type {Model.Race} */ a, /** @type {Model.Race} */ b) =>
-            isAfter(a.startAt, b.startAt) ? 1 : -1,
-          )
-          .filter((/** @type {Model.Race} */ race) =>
+  const todayRaces = useMemo(
+    () =>
+      raceData != null
+        ? [...raceData.races].filter((/** @type {Model.Race} */ race) =>
             isSameDay(race.startAt, date),
           )
-      : [];
+        : [],
+    [raceData, date],
+  );
   const todayRacesToShow = useTodayRacesWithAnimation(todayRaces);
   const heroImageUrl = useHeroImage();
 
+  if (heroImageUrl == null) {
+    return <Container>Loading...</Container>;
+  }
+
   return (
     <Container>
-      {heroImageUrl !== null && <HeroImage url={heroImageUrl} />}
+      <HeroImage url={heroImageUrl} />
 
       <Spacer mt={Space * 2} />
       {userData && (

@@ -21,15 +21,6 @@ export const isBefore = (dateLeft, dateRight) => {
 };
 
 /**
- * @param {string} dateLeft
- * @param {string} dateRight
- * @returns {boolean}
- */
-export const isAfter = (dateLeft, dateRight) => {
-  return toDate(dateLeft).isAfter(toDate(dateRight));
-};
-
-/**
  *
  * @param {string} ts
  * @returns {string}
